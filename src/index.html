@@ -1,0 +1,396 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Tweet to Map - A Twitter Search Feed to Google Maps jQuery Plugin</title>
+        <meta name="description" content="The Tweet to Map jQuery plugin gives you the power to create Google Maps, showing location based Tweets.">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,minimal-ui">
+        <link rel="dns-prefetch" href="//maps.googleapis.com">
+        <link rel="dns-prefetch" href="//apis.google.com">
+        <link rel="dns-prefetch" href="//maps.gstatic.com">
+        <link rel="dns-prefetch" href="//platform.twitter.com">
+        <link rel="dns-prefetch" href="//connect.facebook.net">
+        <meta property="og:title" content="Tweet to Map - A Twitter to Google Maps jQuery Plugin">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://tweettomap.com/">
+        <meta property="og:image" content="/images/fb-icon.jpg">
+        <meta property="og:site_name" content="Tweet to Map">
+        <meta property="og:description" content="The Tweet to Map jQuery plugin gives you the power to create Google Maps, showing location based Tweets.">
+        <meta property="fb:app_id" content="1443322352613478">
+
+        <!-- build:css(.tmp) /styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:css(.tmp) /tweetmap/tweetMap-1.1.0.min.css -->
+        <link rel="stylesheet" href="tweetmap/tweetMap.css">
+        <!-- endbuild -->
+        <!-- build:js /scripts/vendor/modernizr.js -->
+        <script src="../bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="fb-root"></div>
+        <nav id="main-nav-js" class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div id="navbar-header-js" class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><h1>Tweet to Map <span>1.1.0</span></h1><small>jQuery Plugin</small></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div id="main-nav-items-js" class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#demos"><span>Demos &amp; Features</span></a></li>
+                        <li><a href="#how"><span>How to use</span></a></li>
+                        <li><a href="#options"><span>Options</span></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="http://codecanyon.net/item/tweet-to-map/8678776?ref=simonbetton" class="downloadbutton" target="_blank"><span>Download</span></a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="heroText">The <strong>Tweet&nbsp;to&nbsp;Map</strong> jQuery plugin gives you the power to create <strong>Google&nbsp;Maps</strong>, showing location based&nbsp;<strong>Tweets</strong>.</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="share-block-js" class="share-block">
+                        <div class="item"><div class="fb-like" data-href="http://tweettomap.com" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div></div>
+                        <div class="item"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tweettomap.com" data-count="none">Tweet</a></div>
+                        <div class="item"><div class="g-plusone" data-size="medium" data-annotation="none" data-href="http://tweettomap.com"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 id="demos" name="demos">Simple map with markers<small>Default Tweet to Map options</small></h3>
+                        <div id="default_map" class="default_map gmap"></div>
+<pre class="prettyprint linenums">
+$('.default_map').tweetMap({
+    q: '#newyork',
+    latitude: '40.714353',
+    longitude: '-74.005973',
+    zoom: 14
+});
+</pre>
+                </div>
+
+                <div class="col-sm-6">
+                    <h3>Map with custom settings<small>Custom start location, zoom level &amp; tile type</small></h3>
+                    <div id="custom_map" class="custom_map gmap"></div>
+<pre class="prettyprint linenums">
+$('.custom_map').tweetMap({
+    q: '#sanfran',
+    latitude: '37.77493',
+    longitude: '-122.419416',
+    zoom: 16,
+    geocode: '37.77493, -122.419416, 3mi',
+    maptype: 'TERRAIN'
+});
+</pre>
+                    <a href="#reload" id="reloadFeed" class="btn btn-default"><i class="icon-refresh"></i> Reload Twitter feed</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>What are the features?</h3>
+                    <ul>
+                        <li>Displays Twitter posts (Tweets) by location <small>Using Twitter's HTTP API</small></li>
+                        <li>Option to load multiple maps on the same page</li>
+                        <li>iPhone and iPad touch compatible <small>And optimized for Retina display</small></li>
+                        <li>Pretty markers and map bubbles <small>Configurable markers and over-writable map bubble css</small></li>
+                        <li>Lightweight! <small>The compressed map script is only 4KB!</small></li>
+                    </ul>
+                </div><!-- eo .span6 -->
+
+                <div class="col-sm-6">
+                    <h3><br /></h3>
+                    <ul>
+                        <li>Choose to show Tweets with or without images</li>
+                        <li>Uses Twitter style time for Tweets <small>Using the timeago jQuery plugin. Only 3KB!</small></li>
+                        <li>Over 10 (and counting) easily configurable settings!</li>
+                        <li>Continuous development. <small>The project is constantly revised and improved with added features</small></li>
+                        <li>Supports all major browsers <small>Internet Explorer 7+, Firefox 4+, Safari 5+ &amp; Chrome 14+</small></li>
+                    </ul>
+                </div><!-- eo .span6 -->
+            </div><!-- eo .row -->
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 id="how" name="how">How to use?</h2>
+                    <h3>Getting started..</h3>
+                    <p>With Tweet to Map, it's very easy. Simply follow these steps and you're ready to go!</p>
+                    <ol id="howNav">
+                        <li><a href="#requirements">Requirements</a></li>
+                        <li><a href="#installation">Installation</a></li>
+                        <li><a href="#htmlstructure">HTML structure</a></li>
+                        <li><a href="#creatingamap">Creating a map</a></li>
+                        <li><a href="#options">Customizing</a></li>
+                    </ol>
+
+                    <h3 id="requirements" name="requirements">Requirements</h3>
+                    <p>There are two requirements you need to meet before you can use Tweet to Map on your website. First you need to read through the following documentation and understand how to get it working. Second is you must be able to include jQuery 1.8.1 in your web page. This is what we have been testing with - It <u>may</u> work with older versions.</p>
+
+                    <h3 id="installation" name="installation">Installation</h3>
+                    <p><a href="http://codecanyon.net/item/tweet-to-map/2440556?ref=simonbetton" target="_blank">Download</a> the latest version of Tweet to Map.</p>
+                    <p>Browse to the /tweetmap directory and include the tweetMap css file in the <code>&lt;head&gt;</code> section on your website.</p>
+<pre class="prettyprint linenums">
+&lt;link rel=&quot;stylesheet&quot; href=&quot;tweetmap/tweetMap-1.1.0.min.css&quot;&gt;
+</pre>
+                    <p>Next, add the Google Maps API along with jQuery, timeago and tweetMap just before the <code>&lt;/body&gt;</code> tag.</p>
+<pre class="prettyprint linenums">
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://maps.googleapis.com/maps/api/js?sensor=false&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;tweetmap/tweetMap-1.1.0.min.js&quot;&gt;&lt;/script&gt;
+</pre>
+                    <p>Once that is done, you need to browse to /tweetmap/config.php and enter you Twitter app settings. If you're not sure about how to get these, <a href="http://iag.me/socialmedia/how-to-create-a-twitter-app-in-8-easy-steps/">visit here to get the required keys</a>.</p>
+                    <p>Optional: to change the cache frequency, browse to /tweetmap/config.php and edit 'CACHE_DURATION'. By default it is set as 1 hour.</p>
+                    <h3 id="htmlstructure" name="htmlstructure">HTML structure</h3>
+                    <p>The HTML structure is quite simple too. Just place a <code>&lt;div&gt;</code> somewhere on your page, style it with CSS (<strong>don't forget</strong> to assign a fixed width and height) and give it a unique ID or class.
+                    <br> <strong>The gmap class is required</strong>.</p>
+<pre class="prettyprint linenums">
+&lt;div id=&quot;myMap&quot; class=&quot;gmap&quot;&gt;&lt;/div&gt;
+</pre>
+
+                    <h3 id="creatingamap" name="creatingamap">Creating a map</h3>
+                    <p>Select the new div element using jQuery's selectors and call the tweetMap() function on it with the required Twitter username/screenname. It is recommended to call the function once the DOM is ready.</p>
+<pre class="prettyprint linenums">
+$(document).ready(function(){
+    $('#myMap').tweetMap({
+        q: '#newyork',
+        latitude: '40.714353',
+        longitude: '-74.005973'
+    });
+});
+</pre>
+
+                </div><!-- eo .span12 -->
+            </div><!-- eo .row -->
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 id="options" name="options">Customizable options</h2>
+                    <p>Tweet to Map can be customized in many different ways. All you need to do is to pass an object to the tweetMap() function. Please see below for a complete list of properties that can be passed.</p>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td width="80"><strong>Option</strong></td>
+                                <td><strong>Properties</strong></td>
+                                <td><strong>Description</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>q</code></td>
+                                <td><strong>string</strong> - Default: ''
+                                </td>
+                                <td>This is the search query to find your Tweets. Using #something OR @something etc.. To test it out, <a href="https://twitter.com/i/#!/search-home">Visit Twitters search page.</a></td>
+                            </tr>
+
+                            <tr>
+                                <td><code>geocode</code></td>
+                                <td><strong>string</strong> - Default: ''
+                                </td>
+                                <td>Returns tweets located within a given radius of the given latitude/longitude. The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by "latitude,longitude,radius", where radius units must be specified as either "mi" (miles) or "km" (kilometers). e.g. 37.781157,-122.398720,1mi</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>latitude</code></td>
+                                <td><strong>string</strong> - Default: ''
+                                </td>
+                                <td>This is the start location when your map loads. You could either use <a href="http://www.geonames.org/" target="_blank">GeoNames</a> or this <a href="javascript:void(prompt('Copy%20&%20paste%20the%20coordinates%20below',gApplication.getMap().getCenter()));">bookmarklet</a> to get the coordinates right from Google Maps.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>longitude</code></td>
+                                <td><strong>string</strong> - Default: ''
+                                </td>
+                                <td>This is the start location when your map loads. You could either use <a href="http://www.geonames.org/" target="_blank">GeoNames</a> or this <a href="javascript:void(prompt('Copy%20&%20paste%20the%20coordinates%20below',gApplication.getMap().getCenter()));">bookmarklet</a> to get the coordinates right from Google Maps.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>zoom</code></td>
+                                <td><strong>integer</strong> - Default: 11</td>
+                                <td>The initial resolution at which to display the map is set by the zoom property, where zoom 0 corresponds to a map of the Earth fully zoomed out, and higher zoom levels zoom in at a higher resolution.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>marker</code></td>
+                                <td><strong>string</strong> - Default: 'tweetmap/marker.png'</td>
+                                <td>Relative Location to the marker image file.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>maptype</code></td>
+                                <td><strong>string</strong> - Default: 'ROADMAP'</td>
+                                <td>ROADMAP displays the default road map view<br>
+                                SATELLITE displays Google Earth satellite images<br>
+                                HYBRID displays a mixture of normal and satellite views<br>
+                                TERRAIN displays a physical map based on terrain information.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>since_id</code></td>
+                                <td><strong>string</strong> - Default: ''</td>
+                                <td>The screen name / username of the user for whom to return results for.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>rpp</code></td>
+                                <td><strong>string</strong> - Default: '100'</td>
+                                <td>Specifies the number of tweets to try and retrieve, up to a maximum of '100'.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>max_id</code></td>
+                                <td><strong>string</strong> - Default: ''</td>
+                                <td>Returns results with an ID less than (that is, older than) or equal to the specified ID.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>until</code></td>
+                                <td><strong>string</strong> - Default: ''</td>
+                                <td>Returns tweets generated before the given date. Date should be formatted as YYYY-MM-DD.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>include_entities</code></td>
+                                <td><strong>string</strong> - Default: 'true'</td>
+                                <td>When set to 'true', each tweet will include a node called "entities,". This node offers a variety of metadata about the tweet, which includes the ability to display images.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>result_type</code></td>
+                                <td><strong>string</strong> - Default: 'recent'</td>
+                                <td>Specifies what type of search results you would prefer to receive. The current default is "recent." Valid values include:
+
+                                    <ul>
+                                        <li>mixed: Include both popular and real time results in the response.</li>
+                                        <li>recent: return only the most recent results in the response</li>
+                                        <li>popular: return only the most popular results in the response.</li>
+                                    </ul>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><code>customMarkers</code></td>
+                                <td><strong>object</strong></td>
+                                <td>You can also add in static custom markers into your Google Map by using the following:
+<pre class="prettyprint" style="min-width: 140px;">
+customMarkers: {
+    marker: {
+        latitude: '-36.84731121505897',
+        longitude: '174.76342678070068',
+        html: '&lt;p&gt;Hello world.&lt;/p&gt;'
+    }
+}
+</pre>
+                            <tr>
+                                <td><code>since_id</code></td>
+                                <td><strong>string</strong> - Default: ''</td>
+                                <td>The screen name / username of the user for whom to return results for.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>rpp</code></td>
+                                <td><strong>string</strong> - Default: '100'</td>
+                                <td>Specifies the number of tweets to try and retrieve, up to a maximum of '100'.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>max_id</code></td>
+                                <td><strong>string</strong> - Default: ''</td>
+                                <td>Returns results with an ID less than (that is, older than) or equal to the specified ID.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>until</code></td>
+                                <td><strong>string</strong> - Default: ''</td>
+                                <td>Returns tweets generated before the given date. Date should be formatted as YYYY-MM-DD.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>include_entities</code></td>
+                                <td><strong>string</strong> - Default: 'true'</td>
+                                <td>When set to 'true', each tweet will include a node called "entities,". This node offers a variety of metadata about the tweet, which includes the ability to display images.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>result_type</code></td>
+                                <td><strong>string</strong> - Default: 'recent'</td>
+                                <td>Specifies what type of search results you would prefer to receive. The current default is "recent." Valid values include:
+
+                                    <ul>
+                                        <li>mixed: Include both popular and real time results in the response.</li>
+                                        <li>recent: return only the most recent results in the response</li>
+                                        <li>popular: return only the most popular results in the response.</li>
+                                    </ul>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><code>customMarkers</code></td>
+                                <td><strong>object</strong></td>
+                                <td>You can also add in static custom markers into your Google Map by using the following:
+<pre class="prettyprint" style="min-width: 140px;">
+customMarkers: {
+    marker: {
+        latitude: '-36.84731121505897',
+        longitude: '174.76342678070068',
+        html: '&lt;p&gt;Hello world.&lt;/p&gt;'
+    }
+}
+</pre>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- eo .span12 -->
+            </div><!-- eo .row -->
+        </div>
+
+        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCvlzG6d3V0T3dSfXD67j6E7AUDAtUkhwY&amp;sensor=false"></script>
+
+        <!-- build:js({src,.tmp}) /scripts/main.js -->
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
+        <script src="tweetmap/timeago.js"></script>
+        <script src="tweetmap/tweetMap.js"></script>
+        <script src="scripts/prettify.js"></script>
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+
+        <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-32524102-1', 'auto');
+        ga('send', 'pageview');
+        </script>
+    </body>
+</html>
